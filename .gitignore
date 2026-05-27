@@ -1,0 +1,7 @@
+.codex/
+.agents/
+node_modules/
+docs/
+dist/
+dist-ssr/
+*.local

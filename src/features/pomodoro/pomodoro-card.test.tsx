@@ -33,7 +33,7 @@ describe("PomodoroCard", () => {
 
     expect(screen.getByText("00:00:00")).toBeInTheDocument();
     expect(playAlarm).toHaveBeenCalledOnce();
-    expect(screen.getByText("대기")).toBeInTheDocument();
+    expect(screen.getByText("완료")).toBeInTheDocument();
   });
 
   it("switches between presets and resets an interrupted countdown", () => {

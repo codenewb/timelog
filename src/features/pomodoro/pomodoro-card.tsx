@@ -24,6 +24,13 @@ export function PomodoroCard({
   const timer = usePomodoro(playAlarm);
   const [minutes, setMinutes] = useState("25");
   const [error, setError] = useState("");
+  const isComplete = timer.remainingSeconds === 0;
+  const status = timer.isRunning ? "진행 중" : isComplete ? "완료" : "대기";
+  const statusVariant = timer.isRunning
+    ? "default"
+    : isComplete
+      ? "outline"
+      : "secondary";
 
   function useCustomDuration() {
     const value = Number(minutes);
@@ -47,9 +54,7 @@ export function PomodoroCard({
       <CardHeader>
         <div className="flex items-center justify-between gap-3">
           <CardTitle>포모도로</CardTitle>
-          <Badge variant={timer.isRunning ? "default" : "secondary"}>
-            {timer.isRunning ? "진행 중" : "대기"}
-          </Badge>
+          <Badge variant={statusVariant}>{status}</Badge>
         </div>
         <CardDescription>
           집중 또는 휴식 시간을 독립적으로 카운트다운합니다.
@@ -99,7 +104,7 @@ export function PomodoroCard({
           <Button
             type="button"
             onClick={start}
-            disabled={timer.isRunning || timer.remainingSeconds === 0}
+            disabled={timer.isRunning || isComplete}
           >
             시작
           </Button>
